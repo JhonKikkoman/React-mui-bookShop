@@ -10,8 +10,16 @@ import {
   Typography,
 } from '@mui/material';
 import BasketItem from './BasketItem';
+import { itemT } from './App';
 
-function Basket(prop: any) {
+interface PropT {
+  removeFromOrder: (value: string) => void;
+  order: itemT[];
+  cartOpen: boolean;
+  closeCart: (value: React.SetStateAction<boolean>) => void;
+}
+
+function Basket(prop: PropT) {
   const { cartOpen, closeCart, order = [], removeFromOrder } = prop;
   return (
     <Drawer
@@ -31,14 +39,14 @@ function Basket(prop: any) {
           <ListItem>Корзина пустая</ListItem>
         ) : (
           <>
-            {order.map((el: any) => (
+            {order.map((el: itemT) => (
               <BasketItem key={el.name} removeOrder={removeFromOrder} {...el} />
             ))}
             <Divider />
             <ListItem>
               <Typography sx={{ fontWeight: '800' }}>
                 Общая стоимость:{' '}
-                {order.reduce((acc: number, item: any) => {
+                {order.reduce((acc: number, item: itemT) => {
                   return acc + item.price * item.quantity;
                 }, 0)}
               </Typography>

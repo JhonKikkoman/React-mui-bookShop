@@ -9,9 +9,14 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import { goodsT } from '../data/goods';
+import { goodsItemT } from './App';
 
-const GoodsItem = (props: any) => {
+interface propT extends goodsT {
+  setOrder: (value: goodsItemT) => void;
+}
+
+const GoodsItem = (props: propT) => {
   const { name, price, setOrder, poster } = props;
 
   return (

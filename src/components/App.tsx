@@ -11,14 +11,24 @@ import { goods } from '../data/goods';
 import Header from './Header';
 import { Container } from '@mui/material';
 
+export interface goodsItemT {
+  id: string;
+  name: string;
+  price: number;
+}
+
+export interface itemT extends goodsItemT {
+  quantity: number;
+}
+
 const App = () => {
-  const [order, setOrder] = useState([] as any);
+  const [order, setOrder] = useState<itemT[]>([]);
   const [search, setSearch] = useState('');
   const [products, setProducts] = useState(goods);
-  const [isCartOpen, setCart] = useState(false);
-  const [isSnackOpen, setSnack] = useState(false);
+  const [isCartOpen, setCart] = useState<boolean>(false);
+  const [isSnackOpen, setSnack] = useState<boolean>(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) {
       setProducts(goods);
       setSearch('');
@@ -33,18 +43,18 @@ const App = () => {
     );
   };
 
-  const addToOrder = (goodsItem: any) => {
+  const addToOrder = (goodsItem: goodsItemT) => {
     let quantity = 1;
 
     const indexInOrder = order.findIndex(
-      (item: any) => item.id === goodsItem.id
+      (item: itemT) => item.id === goodsItem.id
     );
 
     if (indexInOrder > -1) {
       quantity = order[indexInOrder].quantity + 1;
 
       setOrder(
-        order.map((item: any) => {
+        order.map((item: itemT) => {
           if (item.id !== goodsItem.id) return item;
 
           return {
@@ -69,11 +79,11 @@ const App = () => {
     setSnack(true);
   };
 
-  const removeFromOrder = (goodsItem: any) => {
-    setOrder(order.filter((item: any) => item.id !== goodsItem));
+  const removeFromOrder = (goodsItem: string) => {
+    setOrder(order.filter((item: itemT) => item.id !== goodsItem));
   };
 
-  const totalQuant = order.reduce((acc: number, item: any) => {
+  const totalQuant = order.reduce((acc: number, item: itemT) => {
     return acc + item.quantity;
   }, 0);
 

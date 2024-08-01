@@ -1,6 +1,14 @@
 /** @format */
 
-export const goods = [
+export interface goodsT {
+  id: string;
+  category: string;
+  name: string;
+  poster: string;
+  price: number;
+}
+
+export const goods: goodsT[] = [
   {
     id: 'js01',
     category: 'books',

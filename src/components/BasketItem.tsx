@@ -2,8 +2,13 @@
 
 import { Close } from '@mui/icons-material';
 import { IconButton, ListItem, Typography } from '@mui/material';
+import { itemT } from './App';
 
-const BasketItem = (props: any) => {
+interface propT extends itemT {
+  removeOrder: (value: string) => void;
+}
+
+const BasketItem = (props: propT) => {
   const { name, price, quantity, id, removeOrder } = props;
   return (
     <ListItem>

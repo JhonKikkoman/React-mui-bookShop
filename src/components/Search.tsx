@@ -2,7 +2,12 @@
 
 import { TextField } from '@mui/material';
 
-const Search = (props: any) => {
+interface propT {
+  onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+}
+
+const Search = (props: propT) => {
   const { onChange, value } = props;
 
   return (

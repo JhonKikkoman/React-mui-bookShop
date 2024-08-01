@@ -3,7 +3,12 @@
 import { ShoppingCart } from '@mui/icons-material';
 import { AppBar, Badge, IconButton, Toolbar, Typography } from '@mui/material';
 
-function Header(props: any) {
+interface propT {
+  handleCart: () => void;
+  orderLen: number;
+}
+
+function Header(props: propT) {
   const { handleCart, orderLen } = props;
   return (
     <AppBar position='static'>
